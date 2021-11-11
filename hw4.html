@@ -93,6 +93,12 @@ let [a, b, c] = [1, "2", power];
 console.log("a = %d", a);
 console.log("b = %s", b);
 console.log("c = %s", c);
+
+[a, b, c] = [b, c, a]
+
+console.log("a = %s", a);
+console.log("b = %s", b);
+console.log("c = %d", c);
 }
 
 // Math
