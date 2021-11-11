@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+
+ <head>
+       <meta charset="utf-8">
+       <title>JavaScript</title>
+    </head>
+<body>
+
+<script type="text/javascript">
+globalThis["Gl"] = 156;
+
+//Функция
+function power(x,y) {
+let result = x;
+for (let i = 1; i < y; i++)
+  { result *=x; }
+return result;
+}
+
+//Использование функции
+
+console.log("Возведём в степень 2 числа от 1 до 3, получим %d, %d, %d", power(1,2), power(2,2), power(3,2));
+
+//Переменные var и let
+
+{
+var a = 5;
+console.log("Объявили переменную var a в блоке и использовали её в блоке, результат = %d",a);
+}
+console.log("Объявили переменную var a в блоке,но использовали её не в блоке, результат = %d",a);
+
+{
+let b = 6;
+console.log("Объявили переменную let b в блоке и использовали её в блоке, результат = %d",b);
+}
+try{
+console.log("Объявили переменную let b в блоке, но использовали её не в блоке, результат = %s",b);
+}
+
+catch (error){
+console.log("Такая ошибка происходит, если использовать let вне блока: %s", error.name);
+}
+
+
+//== и ===
+{
+let a = 7;
+let b = "7";
+console.log("a == b it is %s", a==b);
+console.log("a === b it is %s", a===b);
+}
+
+//typeof
+{
+console.log("typeof(\"abc\") = %s", typeof("abc"));
+console.log("typeof(power) = %s", typeof(power));
+console.log("typeof(1) = %s", typeof(1));
+}
+
+//for(...of...)
+
+{
+let arr = [1, 2, 3, 4, 5]
+let pr = 1;
+
+for ( let i of arr) {
+  pr*=i;
+  }
+console.log("Произведение элементов массива = %d", pr);
+}
+// global
+
+{
+console.log("Глобальная переменная Gl = %d", Gl);
+delete globalThis["Gl"];
+console.log("Удалили глобальную переменнуль Gl = %s", typeof(GL)); 
+}
+
+// =>
+
+{
+let p = (a,b) => console.log("Произведение %d и %d = %d", a, b, a*b);
+p(1,2);
+p(3,4);
+p(5,6);
+}
+
+//Разрушающее присвоение
+{
+let [a, b, c] = [1, "2", power];
+
+console.log("a = %d", a);
+console.log("b = %s", b);
+console.log("c = %s", c);
+}
+
+// Math
+
+{ 
+console.log("Рандомное число от 0 до 1 = %f", Math.random());
+}
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
