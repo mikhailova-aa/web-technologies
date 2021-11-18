@@ -1,0 +1,222 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+<script type="text/javascript">
+
+//Наследование
+console.log("INHERITANCE");
+{
+	let Num = {
+	x: 1,
+	y: 2,
+	z: 3,
+	print() {
+						return `(${this.x}, ${this.y}, ${this.z})`;
+					},
+	sum() {
+		return this.x + this.y +this.z;
+	}
+	}
+	
+	console.log(Num.x);
+	let n = Object.create(Num);
+	console.log(n);
+	console.log(n.x);
+	console.log(n.y);
+	console.log(n.z);
+	console.log(n.print());
+	console.log(n.sum());
+
+	Num.y = 0;
+	console.log(Num.y);
+	console.log(Num.print());
+}
+
+//Работа с прототипами
+console.log("PROTOTIPES");
+{
+	class Numbers {
+		constructor (x, y, z) {
+			this.x = x,
+			this.y = y; 
+			this.z = z;
+			this.a = "a";
+			}
+			print() {
+						return `(${this.x}, ${this.y}, ${this.z})`;
+					};
+			sum() {
+				return this.x + this.y +this.z;
+				}
+			}
+		let n1 = new Numbers(9, 8, 7);
+		console.log(n1.z);
+		console.log(n1.sum());
+		console.log(n1.a);
+}
+
+//Теневой метод
+console.log("SHADE");
+{
+	class student {
+		constructor (course, score) {
+		this.course = course;
+		this.score = score;
+		}
+		}
+	class graduate extends student {
+		constructor (course, score, diploma) {
+		super (4, 8)
+		this.diploma = diploma
+		}
+	}
+	
+	let A = new graduate();
+	A.diploma = 'blue';
+	console.log(A);
+}
+
+
+//Свойства
+console.log("PROPERTIES");
+{
+	let Numbers = {x: 5, y: 6, z: 7};
+	
+	Object.defineProperty(Numbers, "a", {
+		enumerable: false,
+		value: "not a",
+		});
+		
+
+	console.log(Numbers.a);
+	
+	for (let i in Numbers) {
+		console.log(i);
+		}
+		
+	Object.defineProperty(Numbers, "some", {
+		set: function(value) {
+		this.a = "b";
+		return value;
+		}
+		});
+		console.log(Numbers.a);
+		Numbers.some = 3;
+		console.log(Numbers.a);
+			console.log(Numbers);
+}
+
+//Метод не со своим объектом
+console.log("OTHER OBJECT");
+{
+class Numbers {
+		constructor (x, y, z) {
+			this.x = x,
+			this.y = y; 
+			this.z = z;
+			}
+			}
+	let num2 = new Numbers(6, 6, 6);
+	
+	try {
+		console.log(num2.new());
+		}
+	catch(error) {
+		console.log("Вызов метода не со своим объектом %s", error.name);
+		}
+}
+
+//Свой метод в класс строки
+console.log("STRING");
+{
+
+	String.prototype.test = function() {
+		console.log("test");
+		}
+		str = "String";
+		str.test();
+}
+
+//Protected
+console.log("PROTECTED");
+{
+	class ABC {
+		constructor(a, b, c) {
+			this.a = a;
+			this.b = b; 
+			this.c = c;
+			this._d = "d";
+			}
+		get d() {
+			return this._d;
+			}
+			}
+		let str = new ABC("a", "b", "c", "d");
+		str.a = "d";
+		str.d = "a";
+		console.log(str.a);
+		console.log(str.d);
+}
+			
+//Private
+console.log("PRIVATE");
+{
+	class newcl {
+		#pr = 1;
+		
+		#checkPrivate (value) {
+		if ((value) > 0) console.log ("value is bigger than 0");
+		
+		}
+		}
+	let t = new newcl();
+	
+	//t.#pr = 0; к этому полю не получается обратиться, так как оно приватное
+	
+	}
+
+//Mixin
+ console.log("MIXIN");
+{
+
+	let sayMixin = {
+ 	 say(phrase) {
+   	 console.log(phrase);
+  }
+};
+
+let Mixin = {
+  __proto__: sayMixin,
+ 
+  say2() {
+    super.say(`Hello,  ${this.name}`); 
+  }
+};
+
+class User {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+
+Object.assign(User.prototype, Mixin);
+
+
+let me = new User("it\'s me");
+me.say2(); 
+
+
+}
+
+
+
+
+
+
+</script>
+</body>
+</html>
+
