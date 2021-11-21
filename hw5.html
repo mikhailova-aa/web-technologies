@@ -37,24 +37,17 @@ console.log("INHERITANCE");
 //Работа с прототипами
 console.log("PROTOTIPES");
 {
-	class Numbers {
-		constructor (x, y, z) {
-			this.x = x,
-			this.y = y; 
-			this.z = z;
-			this.a = "a";
-			}
-			print() {
-						return `(${this.x}, ${this.y}, ${this.z})`;
-					};
-			sum() {
-				return this.x + this.y +this.z;
-				}
-			}
-		let n1 = new Numbers(9, 8, 7);
-		console.log(n1.z);
-		console.log(n1.sum());
-		console.log(n1.a);
+	let first = {
+		some: 1
+		}
+	let second = {
+		else: 2
+		}
+		
+	Object.setPrototypeOf(first, second);
+	console.log(Object.getPrototypeOf(first) == second);
+	console.log(Object.getPrototypeOf(second) == first);
+	
 }
 
 //Теневой метод
@@ -111,32 +104,34 @@ console.log("PROPERTIES");
 //Метод не со своим объектом
 console.log("OTHER OBJECT");
 {
-class Numbers {
-		constructor (x, y, z) {
-			this.x = x,
-			this.y = y; 
-			this.z = z;
-			}
-			}
-	let num2 = new Numbers(6, 6, 6);
-	
-	try {
-		console.log(num2.new());
+	function counter(x, y) {
+		this.s = x + y;
 		}
-	catch(error) {
-		console.log("Вызов метода не со своим объектом %s", error.name);
+		
+	function counter2(x,y) {
+		counter.call(this, x, y);
+		this.comp = x * y;
 		}
+		
+	let M = new counter2(6,5);
+	console.log(M.comp, M.s);
 }
 
 //Свой метод в класс строки
 console.log("STRING");
 {
-
-	String.prototype.test = function() {
-		console.log("test");
+	for (let i in String){
+		console.log(i);
 		}
-		str = "String";
+		
+	String.prototype.test = function() {
+		console.log("test, %s", this);
+		}
+		
+		str = "something";
 		str.test();
+		
+	
 }
 
 //Protected
@@ -179,35 +174,20 @@ console.log("PRIVATE");
 
 //Mixin
  console.log("MIXIN");
+
 {
-
-	let sayMixin = {
- 	 say(phrase) {
-   	 console.log(phrase);
-  }
-};
-
-let Mixin = {
-  __proto__: sayMixin,
- 
-  say2() {
-    super.say(`Hello,  ${this.name}`); 
-  }
-};
-
-class User {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-
-Object.assign(User.prototype, Mixin);
-
-
-let me = new User("it\'s me");
-me.say2(); 
-
+	let Mixin = {
+		func() {
+			console.log("testing mixins", this.some);
+			}
+		};
+	class i{
+		constructor(some){
+			this.some = some;
+			}
+			}
+	Object.assign(i.prototype, Mixin);
+	new i("Finished testing Mixins").func();
 
 }
 
