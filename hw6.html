@@ -18,16 +18,30 @@
       
      <div class="class_element" id="id_element">Удалить класс</div>
       
-      <p style="text-align: center" ><button>Кнопка с текстом</button></p>
+      <p style="text-align: center" id = ><button id = "button" >Кнопка 1</button></p>
       
-      <div id="parent">
+     <div id="parent">
   <p>1</p>
   <p>2</p>
   <p>3</p>
       </div>
-      
-      
+     
+  <a href="https://ru.tradingview.com/chart/ofa8zuyU/">Ссылка по которой нельзя перейти</a>
+  <div id="div">
+	<p>Абзац</p>
+</div>
+
+<style>
+  body* {
+    margin: 10px;
+    border: 1px solid blue;
+  }
+</style>
+
+
 <script type="text/javascript">
+
+
 
 {
 //создание элемента
@@ -104,13 +118,76 @@ console.log(id_element.classList);
 id_element. classList. remove("class_element");
 console.log(id_element.classList);
 }
-console.log("event - keyboard");
+console.log("event - mouse");
 {
+	
+button.onclick = function(event) {
+alert("Button.");
+}
 
+}
 
+console.log("add event and remove event");
+{
+let listener = function(event) {
+alert("Listener");
+}
+document.body.addEventListener('click', listener, false); //здесь вылезает окно Listener
+document.body.removeEventListener('click', listener, false); //удалили, окно не вылезает
 
 
 }
+
+console.log("Дефолтное действие");
+{
+ var link = document.querySelector("a");
+  link.addEventListener("click", function(event) {
+    console.log("No");
+    event.preventDefault();
+  });
+
+}
+
+console.log("Target");
+
+
+{
+var div = document.getElementById('div');
+
+div.addEventListener('click', function(event) {
+	var target = event.target;
+	alert(target.tagName); //p в окошке
+});
+}
+
+
+
+console.log("capturing/bubbling");
+{
+for(let elem of document.querySelectorAll('*')) {
+    elem.addEventListener("click", e => alert(`Погружение: ${elem.tagName}`), true);
+    elem.addEventListener("click", e => alert(`Всплытие: ${elem.tagName}`));
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
