@@ -1,6 +1,6 @@
 <html>
 <head>
-	<meta charset = "utf-8">
+  <meta charset = "utf-8">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         </ul>
 
       <div>Конец</div>
-      <p><img src="https://sun9-29.userapi.com/impg/Rra8Mk0lqF29hy065ggIhdHZYtEJZ3cMfrJPaQ/w4Qxx1w5Ib8.jpg?size=526x703&quality=96&sign=6659216a433c475eb4e6bd6b5c200b8d&type=album" width="400" height="400" ></p>
+      <p><img class = "joke" src="https://sun9-29.userapi.com/impg/Rra8Mk0lqF29hy065ggIhdHZYtEJZ3cMfrJPaQ/w4Qxx1w5Ib8.jpg?size=526x703&quality=96&sign=6659216a433c475eb4e6bd6b5c200b8d&type=album" width="400" height="400" ></p>
       
      <div class="class_element" id="id_element">Удалить класс</div>
       
@@ -28,7 +28,7 @@
      
   <a href="https://ru.tradingview.com/chart/ofa8zuyU/">Ссылка по которой нельзя перейти</a>
   <div id="div">
-	<p>Абзац</p>
+  <p>Абзац</p>
 </div>
 
 <style>
@@ -75,11 +75,11 @@ for (let i = 0; i < document.body.childNodes.length; i++) {
 //arguments
 
 function print (){
-	let s = [].join.call(arguments, ';');
-	console.log(s);
-	}
-	
-	print("a1", "a2", "a3");
+  let s = [].join.call(arguments, ';');
+  console.log(s);
+  }
+  
+  print("a1", "a2", "a3");
 }
 
 console.log("first child");
@@ -120,7 +120,7 @@ console.log(id_element.classList);
 }
 console.log("event - mouse");
 {
-	
+  
 button.onclick = function(event) {
 alert("Button.");
 }
@@ -129,11 +129,12 @@ alert("Button.");
 
 console.log("add event and remove event");
 {
-let listener = function(event) {
-alert("Listener");
+let listener = document.querySelector('.joke');
+function event () {
+alert('Listener');
 }
-document.body.addEventListener('click', listener, false); //здесь вылезает окно Listener
-document.body.removeEventListener('click', listener, false); //удалили, окно не вылезает
+listener.addEventListener("click", event); //здесь вылезает окно Listener
+listener.removeEventListener("click", event); //удалили, окно не вылезает
 
 
 }
@@ -155,21 +156,20 @@ console.log("Target");
 var div = document.getElementById('div');
 
 div.addEventListener('click', function(event) {
-	var target = event.target;
-	alert(target.tagName); //p в окошке
+  var target = event.target;
+  alert(target.tagName); //p в окошке
 });
 }
 
 
 
 console.log("capturing/bubbling");
-{
-for(let elem of document.querySelectorAll('*')) {
-    elem.addEventListener("click", e => alert(`Погружение: ${elem.tagName}`), true);
-    elem.addEventListener("click", e => alert(`Всплытие: ${elem.tagName}`));
-  }
+
+    document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, {capture: true}));
+    document.addEventListener("click", e => alert("Всплытие: " + e.target.tagName));
   
-}
+  
+
 
 
 
