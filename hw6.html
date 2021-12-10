@@ -1,0 +1,201 @@
+<html>
+<head>
+  <meta charset = "utf-8">
+</head>
+
+<body>
+<p class="class1"> Это тег"p"</p>
+      <span> Это тег "span"</span>
+      <p><b id="b"> Это тег "b" в теге "p"</b></p>
+      <div id="class2">Начало</div>
+
+        <ul>
+            <li>Информация</li>
+        </ul>
+
+      <div>Конец</div>
+      <p><img class = "joke" src="https://sun9-29.userapi.com/impg/Rra8Mk0lqF29hy065ggIhdHZYtEJZ3cMfrJPaQ/w4Qxx1w5Ib8.jpg?size=526x703&quality=96&sign=6659216a433c475eb4e6bd6b5c200b8d&type=album" width="400" height="400" ></p>
+      
+     <div class="class_element" id="id_element">Удалить класс</div>
+      
+      <p style="text-align: center" id = ><button id = "button" >Кнопка 1</button></p>
+      
+     <div id="parent">
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+      </div>
+     
+  <a href="https://ru.tradingview.com/chart/ofa8zuyU/">Ссылка по которой нельзя перейти</a>
+  <div id="div">
+  <p>Абзац</p>
+</div>
+
+<style>
+  body* {
+    margin: 10px;
+    border: 1px solid blue;
+  }
+</style>
+
+
+<script type="text/javascript">
+
+
+
+{
+//создание элемента
+
+let dom = document.createElement('p');
+
+dom.textContent = "Текст";
+
+let child = document.body;
+console.log("Из body: " + document.body);
+
+//Create child
+child.appendChild(dom);
+//delete child
+child.removeChild(dom);
+
+let n = document.body;
+console.log("Из body: " + document.body);
+
+child.appendChild(dom);
+//Navigation 
+ for (let i = 0; i < document.body.childNodes.length; i++) {
+      console.log( document.body.childNodes[i] ); 
+    }
+
+//Attributes
+
+for (let i = 0; i < document.body.childNodes.length; i++) {
+      console.log( document.body.childNodes[i].attributes ); 
+}
+//arguments
+
+function print (){
+  let s = [].join.call(arguments, ';');
+  console.log(s);
+  }
+  
+  print("a1", "a2", "a3");
+}
+
+console.log("first child");
+{
+console.log(document.body.firstElementChild);
+}
+
+console.log("last node");
+{
+console.log(document.body.childNodes[0]);
+}
+
+console.log("previous element");
+{
+console.log(document.getElementById("b").previousElementSibling);
+}
+
+console.log("Insert at the end");
+{
+let parent = document.querySelector('#parent');
+let end = document.createElement('p');
+end.textContent = "I'm in the end";
+parent.appendChild(end);
+
+}
+
+console.log("Finding element by selector");
+{
+let elements = document.querySelector("p");
+console.log(elements);
+}
+
+console.log("Delete class");
+{
+console.log(id_element.classList);
+id_element. classList. remove("class_element");
+console.log(id_element.classList);
+}
+console.log("event - mouse");
+{
+  
+button.onclick = function(event) {
+alert("Button.");
+}
+
+}
+
+console.log("add event and remove event");
+{
+let listener = document.querySelector('.joke');
+function event () {
+alert('Listener');
+}
+listener.addEventListener("click", event); //здесь вылезает окно Listener
+listener.removeEventListener("click", event); //удалили, окно не вылезает
+
+
+}
+
+console.log("Дефолтное действие");
+{
+ var link = document.querySelector("a");
+  link.addEventListener("click", function(event) {
+    console.log("No");
+    event.preventDefault();
+  });
+
+}
+
+console.log("Target");
+
+
+{
+var div = document.getElementById('div');
+
+div.addEventListener('click', function(event) {
+  var target = event.target;
+  alert(target.tagName); //p в окошке
+});
+}
+
+
+
+console.log("capturing/bubbling");
+
+    document.addEventListener("click", e => alert("Погружение: " + e.target.tagName, {capture: true}));
+    document.addEventListener("click", e => alert("Всплытие: " + e.target.tagName));
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
