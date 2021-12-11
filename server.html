@@ -19,22 +19,38 @@
 
 
 
-
+<input name="text" id="text">
 
 <button type="button" onclick="login()" >Отправить на сервер и вывести через fetch</button>
 
         </form>
     <div id="result"></div>
 <script>
-var otvet = ""
-
- async function login(){
+//var otvet = ""
+//let key;
+  // let data = document.getElementById('text').value;
+   let data = {
+				"User": "Mikhailova-aa",
+				"Message": "Hello"
+				};
+  function login(){
 		
- await fetch("kot.php")
+   fetch('kot.php', { method: "POST", body: JSON.stringify(data) })
   
- .then(resp => { return resp.text();})
-	.then (resBody => {otvet = resBody;});
-	document.getElementById('result').innerHTML = otvet;
+ .then((response) => { return  response.json();})
+ .then((content) => { console.log(content);})
+ .catch((e) => {
+ console.log('Ошибка: ' + e.message);
+ console.log(e.response); });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //content[key] = otvet ;
+	//document.getElementById('result').innerHTML += otvet;
 }
 
 
