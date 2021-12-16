@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset = "utf-8">
+    <title>BackEnd</title>    
+    </head>
+    
+    <body>    
+<form action="server.php" method="post">
+  <div>
+    <label for="server">Что отправить на сервер?</label>
+    <input name="server" id="server"  >
+  </div>
+  <div>
+    <button>Отправить на сервер и вывести через формы</button>
+  </div>  
+</form>
+<form>
+
+
+
+<input name="text" id="text">
+
+<button type="button" onclick="login()" >Отправить на сервер и вывести через fetch</button>
+
+        </form>
+    <div id="result"></div>
+<script>
+//var otvet = ""
+//let key;
+  // let data = document.getElementById('text').value;
+   let data = {
+				"User": "Mikhailova-aa",
+				"Message": "Hello"
+				};
+  function login(){
+		
+   fetch('kot.php', { method: "POST", body: JSON.stringify(data) })
+  
+ .then((response) => { return  response.json();})
+ .then((content) => { console.log(content);})
+ .catch((e) => {
+ console.log('Ошибка: ' + e.message);
+ console.log(e.response); });
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ //content[key] = otvet ;
+	//document.getElementById('result').innerHTML += otvet;
+}
+
+
+</script>
+</body>
+</html>    
