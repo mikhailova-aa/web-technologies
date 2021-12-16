@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+</head>
+<body>
+<div>
+    <label for="znac">Введи значение</label>
+    <input id="znac">
+    <button onclick="Draw()">Изменить</button>
+
+    <svg height="300" width="180">
+        <path id="drawing" d="M10 80 Q 100 150 180 80" stroke="black" fill="transparent"/>
+    </svg>
+</div>
+
+<div>
+    <label for="text">Что написать?</label>
+    <input id="text">
+    <button onclick="replace()">Написать</button>
+
+    <canvas id="symbols" width="800" height="200"> </canvas>
+</div>
+<div>
+    <p>Было</p>
+    <svg width="538" height="718">
+        <image  xlink:href="https://i.imgur.com/7ygb7OK.jpeg" width="538" height="718">
+        </image>
+    </svg>
+    <button type ="button" id="bl">Блюр</button>
+    <button type ="button" id="cb">Черно-белый</button>
+    <button type ="button" id="ne">Негатив</button>
+    <button type ="button" id="re">Красный</button>
+    <button type ="button" id="kt">Понижение контрастности</button>
+    <p>Стало</p>
+    <svg width="538" height="718">
+        <filter id="blur">
+            <feGaussianBlur stdDeviation="5"></feGaussianBlur>
+            </filter>
+        <filter id="black">
+            <feColorMatrix type="saturate" values="0"></feColorMatrix>
+        </filter>
+        <filter id="negativ">
+            <fecomponenttransfer>
+                <fefuncr type="table" tablevalues="1 0" />
+                <fefuncg type="table" tablevalues="1 0" />
+                <fefuncb type="table" tablevalues="1 0" />
+            </fecomponenttransfer>
+        </filter>
+        <filter id="red">
+            <fecomponenttransfer>
+                <feFuncR type="linear" slope="5" intercept="-0.5" />
+                <feFuncG type="linear" slope="0.2" />
+                <feFuncB type="linear" slope="0.2" />
+                <feFuncA type="identity" />
+            </fecomponenttransfer>
+        </filter>
+        <filter id="st">
+            <fecolormatrix type="saturate" values="0.5"></fecolormatrix>
+        </filter>
+        <image class="image" id="image" xlink:href="https://i.imgur.com/7ygb7OK.jpeg" width="538" height="718"
+            filter=""  >
+        </image>
+    </svg>
+</div>
+<script>
+    function Draw() {
+        let ttt = document.getElementById("drawing");
+        let x = document.getElementById('znac').value;
+        ttt.setAttribute('d', 'M10 80 Q 100 ' +x+ ' 180 80' );
+    }
+
+    function replace() {
+
+        const canvas = document.getElementById("symbols");
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        let data = document.getElementById('text').value;
+        ctx.font = "40px Verdana";
+        var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+        ctx.strokeStyle=gradient;
+        ctx.strokeText(data ,50, 100);
+    }
+
+    document.getElementById('bl').onclick = function() {
+        var b = document.getElementById("image");
+
+        b.setAttribute('filter' , 'url(#blur)' );
+    }
+    document.getElementById('cb').onclick = function() {
+        var b = document.getElementById("image");
+
+        b.setAttribute('filter' , 'url(#black)' );
+    }
+    document.getElementById('ne').onclick = function() {
+        var b = document.getElementById("image");
+
+        b.setAttribute('filter' , 'url(#negativ)' );
+    }
+    document.getElementById('re').onclick = function() {
+        var b = document.getElementById("image");
+
+        b.setAttribute('filter' , 'url(#red)' );
+    }
+    document.getElementById('kt').onclick = function() {
+        var b = document.getElementById("image");
+
+        b.setAttribute('filter' , 'url(#st)' );
+    }
+</script>
+</body>
+</html>
