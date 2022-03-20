@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+</head>
+<body>
+<div>
+    <label for="znac">Введи значение</label>
+    <input id="znac">
+    <button onclick="Draw()">Изменить</button>
+
+    <svg height="300" width="180">
+        <path id="drawing" d="M10 80 Q 100 150 180 80" stroke="black" fill="transparent"/>
+    </svg>
+</div>
+
+<div>
+    <label for="text">Что написать?</label>
+    <input id="text">
+    <button onclick="replace()">Написать</button>
+
+    <canvas id="symbols" width="800" height="200"> </canvas>
+</div>
+
+<div >
+    <p>Было</p>
+    <svg width="500" height="700">
+        <image  xlink:href="https://svgx.ru/svg/23772.svg" width="538" height="718">
+        </image>
+    </svg>
+    <button type ="button" id="bl">Блюр</button>
+    
+    <p>Стало</p>
+    <div id="svg" >
+        
+        
+    </div>
+</div>
+<script>
+     document.getElementById('bl').onclick = function() {
+        var container = document.getElementById("svg");
+	var mySvg = document.createElement("svg");
+	mySvg.setAttribute("width", "500");
+	mySvg.setAttribute("height", "700");
+	mySvg.setAttribute("class", "info");
+	container.appendChild(mySvg);
+	
+	var img = document.createElement("image");
+	img.setAttribute("xlink:href", "https://svgx.ru/svg/23772.svg");
+	img.setAttribute("width", "500");
+	img.setAttribute("height", "700");
+	
+	
+	
+	var filter = document.createElement("filter");
+	filter.setAttribute("id","f1");
+	
+	var gaussianFilter = document.createElement("feGaussianBlur");
+	gaussianFilter.setAttribute("stdDeviation","5");
+	
+	filter.appendChild(gaussianFilter);
+	mySvg.appendChild(filter);
+	mySvg.appendChild(img);
+	img.setAttribute("filter","url(#f1)");
+	
+	
+	
+	
+    }
+    function Draw() {
+        let ttt = document.getElementById("drawing");
+        let x = document.getElementById('znac').value;
+        ttt.setAttribute('d', 'M10 80 Q 100 ' +x+ ' 180 80' );
+    }
+
+    function replace() {
+
+        const canvas = document.getElementById("symbols");
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        let data = document.getElementById('text').value;
+        ctx.font = "40px Verdana";
+        var gradient=ctx.createLinearGradient(0,0,canvas.width,0);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+        ctx.strokeStyle=gradient;
+        ctx.strokeText(data ,50, 100);
+    }
+
+    
+    
+</script>
+</body>
+</html>
